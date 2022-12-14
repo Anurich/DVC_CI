@@ -24,9 +24,9 @@ stages:
       size: 322035
     outs:
     - path: metrics.json
-      md5: d85b5fa7a52d705cb1ebb186c55aff90
-      size: 746
-    - path: model
-      md5: 264af6e81a21e6d386b68c4af46e9bee.dir
+      md5: 2613ae29250cfa2e496d38e12129d018
+      size: 404
+    - path: model/
+      md5: 3cf261325b6646997226d6840b813248.dir
       size: 498659988
       nfiles: 2

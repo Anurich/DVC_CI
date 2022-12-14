@@ -7,12 +7,12 @@ stages:
     - dataset/test_refactor.csv
     - dataset/train_refactor.csv
   trainModel:
-      cmd: python3 src/train.py
-      deps:
-      - dataset/test_refactor.csv
-      - dataset/train_refactor.csv
-      outs:
-      - model
-      metrics:
-      - metrics.json:
-          cache: false
+    cmd: python3 src/train.py
+    deps:
+    - dataset/test_refactor.csv
+    - dataset/train_refactor.csv
+    outs:
+    - model/
+    metrics:
+    - metrics.json:
+        cache: false

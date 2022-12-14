@@ -1,12 +1,14 @@
 import torch
 import pandas as pd
 from config import CONFIG
+import numpy as np
 import json
 import os 
 from torch.utils.data import DataLoader
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from tqdm import tqdm
-import evaluate
+from sklearn.metrics import f1_score, recall_score, precision_score
+# import evaluate
 
 class dataset:
     def __init__(self, tokenizer, df) -> None:
@@ -33,9 +35,9 @@ class dataset:
 
 class training:
     def __init__(self) -> None:
-        self.f1_score = evaluate.load("f1")
-        self.preicision= evaluate.load("precision")
-        self.recall = evaluate.load("recall")
+        # self.f1_score = evaluate.load("f1")
+        # self.preicision= evaluate.load("precision")
+        # self.recall = evaluate.load("recall")
         train_file = CONFIG.STORE_FILE_PATH+"/train_refactor.csv"
         test_file  = CONFIG.STORE_FILE_PATH+"/test_refactor.csv"
         self.df_train = pd.read_csv(train_file)[:100]
@@ -78,22 +80,24 @@ class training:
 
             
             if i % self.val == 0 and i != 0:
-                for data in tqdm(self.testloader):
-                    output = self.model(**data)
-                    loss = output.loss
-                    logits = output.logits
-                    probability = torch.softmax(logits, dim=-1)
-                    prediction = torch.argmax(probability, dim=-1)
-                    self.f1_score.add_batch(predictions=prediction, references=data["labels"])
-                    self.preicision.add_batch(predictions=prediction, references=data["labels"])
-                    self.recall.add_batch(predictions=prediction, references=data["labels"])
+                self.model.eval()
+                with torch.no_grad():
+                    for data in tqdm(self.testloader):
+                        output = self.model(**data)
+                        loss = output.loss
+                        logits = output.logits
+                        probability = torch.softmax(logits, dim=-1)
+                        prediction = torch.argmax(probability, dim=-1)
+                        # self.f1_score.add_batch(predictions=prediction, references=data["labels"])
+                        # self.preicision.add_batch(predictions=prediction, references=data["labels"])
+                        # self.recall.add_batch(predictions=prediction, references=data["labels"])
 
-                    metricDev = {
-                        "f1Score": self.f1_score.compute(),
-                        "recall": self.recall.compute(),
-                        "precision": self.preicision.compute()
-                    }
-                    self.metrics_prc.append(metricDev)
+                        metricDev = {
+                            "f1Score": f1_score(np.array(prediction.detach().cpu().tolist()), np.array(data["labels"].detach().cpu().tolist()),average="macro"),
+                            "recall": recall_score(np.array(prediction.detach().cpu().tolist()), np.array(data["labels"].detach().cpu().tolist())),
+                            "precision": precision_score(np.array(prediction.detach().cpu().tolist()), np.array(data["labels"].detach().cpu().tolist()))
+                        }
+                        self.metrics_prc.append(metricDev)
         
 
         with open("metrics.json", "w") as fp:
