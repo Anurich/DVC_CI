@@ -109,10 +109,10 @@ class training:
             os.mkdir(CONFIG.SAVE_MODEL_PATH)
 
         # self.model.save_pretrained(CONFIG.SAVE_MODEL_PATH)
-                
+             
 
 
 
 
-
-training().trainModel()
+if __name__ == "__main__":
+    training().trainModel()
