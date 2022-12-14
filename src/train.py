@@ -108,7 +108,7 @@ class training:
         if not os.path.isdir(CONFIG.SAVE_MODEL_PATH):
             os.mkdir(CONFIG.SAVE_MODEL_PATH)
 
-        self.model.save_pretrained(CONFIG.SAVE_MODEL_PATH)
+        # self.model.save_pretrained(CONFIG.SAVE_MODEL_PATH)
                 
 
 

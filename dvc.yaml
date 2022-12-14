@@ -11,8 +11,6 @@ stages:
     deps:
     - dataset/test_refactor.csv
     - dataset/train_refactor.csv
-    outs:
-    - model/
     metrics:
     - metrics.json:
         cache: false
