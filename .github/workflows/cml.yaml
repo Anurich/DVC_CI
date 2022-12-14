@@ -15,8 +15,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           dvc repro
-
+          git fetch --prune
           # Report metrics
           echo "## Metrics" >> report.md
-          git fetch --prune
-          dvc metrics diff main --show-md >> report.md
+          dvc metrics diff --show-md main > report.md
