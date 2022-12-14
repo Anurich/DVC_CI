@@ -38,8 +38,8 @@ class training:
         self.recall = evaluate.load("recall")
         train_file = CONFIG.STORE_FILE_PATH+"/train_refactor.csv"
         test_file  = CONFIG.STORE_FILE_PATH+"/test_refactor.csv"
-        self.df_train = pd.read_csv(train_file)[:200]
-        self.df_test  = pd.read_csv(test_file)[:100]
+        self.df_train = pd.read_csv(train_file)[:100]
+        self.df_test  = pd.read_csv(test_file)[:50]
         self.tokenizer = AutoTokenizer.from_pretrained("roberta-base")
         self.model     = AutoModelForSequenceClassification.from_pretrained("roberta-base", num_labels=2)
 
@@ -58,14 +58,13 @@ class training:
         self.testloader  = DataLoader(testDataset, batch_size=32, shuffle=False)
 
         # parameters 
-        self.EPOCH = 10
+        self.EPOCH = 5
         self.val = 2
 
         # define the optimizer
         self.optimizers = torch.optim.Adam(self.model.parameters(), lr=1e-5)
         self.metrics_prc = []
     def trainModel(self):
-
         for i in tqdm(range(self.EPOCH)):
             for data in tqdm(self.trainloader):
                 output = self.model(**data)
@@ -73,7 +72,6 @@ class training:
                 logits = output.logits
                 probability = torch.softmax(logits, dim=-1)
                 prediction = torch.argmax(probability, dim=-1)
-               
                 loss.backward()
                 self.optimizers.step()
                 self.optimizers.zero_grad()

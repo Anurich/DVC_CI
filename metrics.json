@@ -1,0 +1,46 @@
+[
+    {
+        "f1Score": {
+            "f1": 0.0
+        },
+        "recall": {
+            "recall": 0.0
+        },
+        "precision": {
+            "precision": 0.0
+        }
+    },
+    {
+        "f1Score": {
+            "f1": 0.0
+        },
+        "recall": {
+            "recall": 0.0
+        },
+        "precision": {
+            "precision": 0.0
+        }
+    },
+    {
+        "f1Score": {
+            "f1": 0.0
+        },
+        "recall": {
+            "recall": 0.0
+        },
+        "precision": {
+            "precision": 0.0
+        }
+    },
+    {
+        "f1Score": {
+            "f1": 0.0
+        },
+        "recall": {
+            "recall": 0.0
+        },
+        "precision": {
+            "precision": 0.0
+        }
+    }
+]

@@ -11,8 +11,6 @@ class PREP:
         train.to_csv(CONFIG.STORE_FILE_PATH+"/train_refactor.csv", index=False)
         test.to_csv(CONFIG.STORE_FILE_PATH+"/test_refactor.csv", index=False)
 
-
-    
     def removePunctuation(self, sentence):
         return sentence.translate(str.maketrans("", "", string.punctuation)).lower()
 

@@ -1,0 +1,18 @@
+stages:
+  preprocessing:
+    cmd: python3 src/preprocessing.py
+    deps:
+    - dataset/train.csv
+    outs:
+    - dataset/test_refactor.csv
+    - dataset/train_refactor.csv
+  trainModel:
+      cmd: python3 src/train.py
+      deps:
+      - dataset/test_refactor.csv
+      - dataset/train_refactor.csv
+      outs:
+      - model
+      metrics:
+      - metrics.json:
+          cache: false
