@@ -4,4 +4,4 @@ numpy
 pandas
 evaluate
 dvc
-sklearn
+scikit-learn
