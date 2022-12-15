@@ -14,8 +14,7 @@ jobs:
           # Install requirements
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          dvc run -n preprocessing -d dataset/train.csv -o dataset/test_refactor.csv -o dataset/train_refactor.csv -f python preprocessing.py
-          dvc run -n trainModel -d dataset/test_refactor.csv -d dataset/train_refactor.csv -M metrics.json -f python train.py
+          dvc repro
           git fetch --prune
           # Report metrics
           echo "## Metrics" >> report.md
