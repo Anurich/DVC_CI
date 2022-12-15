@@ -14,4 +14,5 @@ class PREP:
     def removePunctuation(self, sentence):
         return sentence.translate(str.maketrans("", "", string.punctuation)).lower()
 
-PREP()
+if __name__ == "__main__":
+    PREP()

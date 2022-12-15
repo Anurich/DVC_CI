@@ -1,28 +1,28 @@
 schema: '2.0'
 stages:
   preprocessing:
-    cmd: python3 src/preprocessing.py
+    cmd: python preprocessing.py
     deps:
     - path: dataset/train.csv
       md5: 19a0294a05264bbb6de41098ff4d7fac
       size: 483091
     outs:
     - path: dataset/test_refactor.csv
-      md5: cfab383e206e88aa2cf8c0d9d5a36ecf
-      size: 137354
+      md5: f75e6cc756b5917c591b0215b2d6f525
+      size: 136785
     - path: dataset/train_refactor.csv
-      md5: e39ea304c38a9e907bfc414274b72d8a
-      size: 322035
+      md5: 93ca822dc89d1e6e5d1ebc4fd373d212
+      size: 322604
   trainModel:
-    cmd: python3 src/train.py
+    cmd: python train.py
     deps:
     - path: dataset/test_refactor.csv
-      md5: cfab383e206e88aa2cf8c0d9d5a36ecf
-      size: 137354
+      md5: f75e6cc756b5917c591b0215b2d6f525
+      size: 136785
     - path: dataset/train_refactor.csv
-      md5: e39ea304c38a9e907bfc414274b72d8a
-      size: 322035
+      md5: 93ca822dc89d1e6e5d1ebc4fd373d212
+      size: 322604
     outs:
     - path: metrics.json
-      md5: 2613ae29250cfa2e496d38e12129d018
+      md5: c86c9953b837a69643e69f4e171ccf08
       size: 404

@@ -1,13 +1,13 @@
 stages:
   preprocessing:
-    cmd: python3 src/preprocessing.py
+    cmd: python preprocessing.py
     deps:
     - dataset/train.csv
     outs:
     - dataset/test_refactor.csv
     - dataset/train_refactor.csv
   trainModel:
-    cmd: python3 src/train.py
+    cmd: python train.py
     deps:
     - dataset/test_refactor.csv
     - dataset/train_refactor.csv
